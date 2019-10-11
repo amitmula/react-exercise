@@ -20,15 +20,15 @@ router.get('/getAll', async (req, res) => {
 /* Insert a new card */
 router.post('/add', [
     check('number')
-        .isLength({ max: 19 }).withMessage('can be max 19 digits long')
+        .isLength({ max: 19 }).withMessage('card number can be max 19 digits long')
         .bail()
-        .matches(/^[0-9]*$/).withMessage('must contain all numbers')
+        .matches(/^[0-9]*$/).withMessage('card number must contain all digits')
         .bail()
-        .custom((value, { req }) => luhn.validate(value)).withMessage('must pass luhn validation'),
+        .custom((value, { req }) => luhn.validate(value)).withMessage('invalid card number, must pass luhn validation'),
     check('balance')
         .isNumeric().withMessage('balance must be a numeric value')
         .bail()
-        .custom((value, { req }) => value === 0).withMessage('must be 0 for new cards')
+        .custom((value, { req }) => value === 0).withMessage('balance must be 0 for new cards')
 ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -37,7 +37,7 @@ router.post('/add', [
         }
         await card.addCard(req.body)
         .then(card => res.status(201).json({
-            message: `The card has been created`,
+            message: 'The card has been created',
             content: card
         }))
         .catch(err => res.status(500).json({ message: err.message }))

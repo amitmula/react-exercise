@@ -15,3 +15,5 @@ app.get('/', (req, res) => {
 })
 // Starting server
 app.listen('1337')
+
+module.exports = app; // for testing
