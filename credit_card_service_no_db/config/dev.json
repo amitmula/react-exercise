@@ -1,1 +1,1 @@
-{ "DBFile": "cards.json" }
+{ "DBFile": "cards.json", "port" : 8080 }
