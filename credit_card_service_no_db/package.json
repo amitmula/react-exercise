@@ -1,0 +1,22 @@
+{
+  "name": "credit_card_service",
+  "version": "1.0.0",
+  "description": "Credit card processing service",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node_modules/.bin/nodemon --harmony -e js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-validator": "^6.2.0",
+    "luhn": "^2.4.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.1"
+  }
+}
