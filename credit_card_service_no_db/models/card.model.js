@@ -1,5 +1,6 @@
-let cards = require('../data/cards.json')
-const filename = './data/cards.json'
+const config = require('config');
+const filename = config.DBFile
+let cards = require('../data/' + filename)
 const helper = require('../helpers/helper.js')
 
 function getAllCards() {
@@ -19,7 +20,7 @@ function addCard(newCard) {
         const id = { id: helper.getNewId(cards) }
         newCard = { ...id, ...newCard }
         cards.push(newCard)
-        helper.writeJSONFile(filename, cards)
+        helper.writeJSONFile('./data/' + filename, cards)
         resolve(newCard)
     })
 }
