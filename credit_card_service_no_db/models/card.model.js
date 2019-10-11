@@ -25,7 +25,16 @@ function addCard(newCard) {
     })
 }
 
+function removeAll() { //for tests
+    return new Promise((resolve, reject) => {
+        cards.length = 0
+        helper.writeJSONFile('./data/' + filename, cards)
+        resolve({})
+    })
+}
+
 module.exports = {
     addCard,
-    getAllCards
+    getAllCards,
+    removeAll
 }
