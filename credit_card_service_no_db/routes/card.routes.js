@@ -20,6 +20,18 @@ router.get('/getAll', async (req, res) => {
         })
 })
 
+router.get('/remove', async (req, res) => {
+    await card.removeAll()
+        .then(resp => res.json(resp))
+        .catch(err => {
+            if (err.status) {
+                res.status(err.status).json({ message: err.message })
+            } else {
+                res.status(500).json({ message: err.message })
+            }
+        })
+})
+
 /* Insert a new card */
 router.post('/add', [
     check('number')
@@ -28,6 +40,8 @@ router.post('/add', [
         .matches(/^[0-9]*$/).withMessage('card number must contain all digits')
         .bail()
         .custom((value, { req }) => luhn.validate(value)).withMessage('invalid card number, must pass luhn validation'),
+    check('limit')
+        .isNumeric().withMessage('limit must be a numeric value'),
     check('balance')
         .isNumeric().withMessage('balance must be a numeric value')
         .bail()
