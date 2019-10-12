@@ -23,7 +23,7 @@ router.get('/getAll', async (req, res) => {
 /* Insert a new card */
 router.post('/add', [
     check('number')
-        .isLength({ max: 19 }).withMessage('card number can be max 19 digits long')
+        .isLength({ max: 19 }).withMessage('card number length must be <= 19')
         .bail()
         .matches(/^[0-9]*$/).withMessage('card number must contain all digits')
         .bail()
