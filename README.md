@@ -17,10 +17,10 @@ Parameters
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| name			| 			|  <p>Card's Name</p>							|
-| number			| 			|  <p>Card Number</p>							|
-| balance			| 			|  **optional** <p>Card's Balance, set to 0 initially if not present in request</p>							|
-| limit			| 			|  <p>Card's Limit</p>							|
+| name			|String  | **required** <p>Card's Name</p>							|
+| number			|String | **required** <p>Card Number</p>							|
+| balance			|Numeric  | **optional** <p>Card's Balance, set to 0 initially if not present in request</p>							|
+| limit			|Numeric  | **required** <p>Card's Limit</p>							|
 
 Sample CURL :
 ```sh
