@@ -30,10 +30,8 @@ export default class CardList extends Component {
             console.log('respData -> ', respData)
             if (respData) {
                 var currentCards = this.state.cards
-                console.log('currentCards -> ', currentCards)
                 currentCards.push(respData)
-                console.log('updatedCards -> ', currentCards)
-                this.setState({...this.state, cards: currentCards})
+                this.setState({ ...this.state, cards: currentCards })
             }
         });
 
@@ -44,10 +42,10 @@ export default class CardList extends Component {
                 'Content-Type': 'application/json',
             }
         }).then(response => response.json())
-            .catch(error => console.error(error))
-            .then(resp => {
-                this.setState({ ...this.state, cards: resp });
-            })
+        .catch(error => console.error(error))
+        .then(resp => {
+            this.setState({ ...this.state, cards: Array.isArray(resp) ? resp : [] });
+        })
     }
 
     render() {
@@ -62,7 +60,7 @@ export default class CardList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.cards.length ? this.state.cards.map((card, index) => {
+                    {this.state.cards.length > 0 ? this.state.cards.map((card, index) => {
                         return (
                             <tr key={index}>
                                 <td>{card.name}</td>
