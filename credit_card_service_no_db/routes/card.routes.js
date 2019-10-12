@@ -3,6 +3,9 @@ const router = express.Router()
 const card = require('../models/card.model')
 const { check, validationResult } = require('express-validator');
 const luhn = require("luhn");
+const CARD_ADDED = {
+	channel: 'card added'
+};
 
 /* All cards */
 router.get('/getAll', async (req, res) => {
@@ -36,11 +39,14 @@ router.post('/add', [
             return res.status(422).json({ errors: errors.array() });
         }
         await card.addCard(req.body)
-        .then(card => res.status(201).json({
-            message: 'The card has been created',
-            content: card
-        }))
-        .catch(err => res.status(500).json({ message: err.message }))
+            .then(card => {
+                req.io.in(CARD_ADDED.channel).emit(CARD_ADDED.channel, card)
+                res.status(201).json({
+                    message: 'The card has been added',
+                    content: card
+                })
+            })
+            .catch(err => res.status(500).json({ message: err.message }))
     }
 )
 
