@@ -35,7 +35,7 @@ router.get('/remove', async (req, res) => {
 /* Insert a new card */
 router.post('/add', [
     check('number')
-        .isLength({ max: 19 }).withMessage('card number length must be <= 19')
+        .isLength({ max: 19 }).withMessage("card number length must be <= 19")
         .bail()
         .matches(/^[0-9]*$/).withMessage('card number must contain all digits')
         .bail()
@@ -43,7 +43,8 @@ router.post('/add', [
     check('limit')
         .isNumeric().withMessage('limit must be a numeric value'),
     check('balance')
-        .isNumeric().withMessage('balance must be a numeric value')
+        .optional()
+        .isInt().withMessage('balance must be a numeric value')
         .bail()
         .custom((value, { req }) => value === 0).withMessage('balance must be 0 for new cards')
 ],

@@ -38,7 +38,7 @@ describe('Card', () => {
                 .end((err, res) => {
                     res.should.have.status(201)
                     res.body.should.be.a('object')
-                    res.body.should.have.property('message').eql('The card has been created')
+                    res.body.should.have.property('message').eql('The card has been added')
                 })
             chai.request(app)
                 .get('/card/getall')
@@ -102,7 +102,7 @@ describe('Card', () => {
                 .send(card)
                 .end((err, res) => {
                     res.should.have.status(422)
-                    res.body.errors[0].should.have.property('msg').eql('card number can be max 19 digits long')
+                    res.body.errors[0].should.have.property('msg').eql("card number length must be <= 19")
                     done()
                 })
         })
