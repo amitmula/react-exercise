@@ -7,18 +7,14 @@ export default class CardList extends Component {
         super(props);
         this.state = {
             cards: [],
-            socket: {}
+            socket: io.connect(process.env.REACT_APP_API_ENDPOINT)
         }
     }
 
     componentDidMount() {
 
-        this.state.socket = io.connect(process.env.REACT_APP_API_ENDPOINT);
-
         this.state.socket.on('connect', () => {
-            this.state.socket.emit('join channel', 'cardAdded', function (confirmation) {
-                console.log("joined channel cardAdded -> ", confirmation);
-            });
+            this.state.socket.emit('join channel', 'cardAdded')
         });
 
         this.state.socket.on('connect_error', () => {
@@ -26,11 +22,9 @@ export default class CardList extends Component {
         });
 
         this.state.socket.on('card added', (socketData) => {
-            var respData = socketData;
-            console.log('respData -> ', respData)
-            if (respData) {
+            if (socketData) {
                 var currentCards = this.state.cards
-                currentCards.push(respData)
+                currentCards.push(socketData)
                 this.setState({ ...this.state, cards: currentCards })
             }
         });

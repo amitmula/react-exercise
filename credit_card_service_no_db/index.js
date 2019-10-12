@@ -21,9 +21,9 @@ const NOTIFICATION_TYPE = {
 };
 
 io.on('connect', function (clientConnection) {
-    clientConnection.on('join channel', function (channelName, callback) {
-        clientConnection.join(NOTIFICATION_TYPE[channelName].channel, callback("joined " + channelName));
-        console.log('client', clientConnection.id, 'joined socket channel -> ', NOTIFICATION_TYPE[channelName].channel);
+    clientConnection.on('join channel', function (channelName) {
+        clientConnection.join(NOTIFICATION_TYPE[channelName].channel)
+        console.log('client', clientConnection.id, 'joined socket channel -> ', NOTIFICATION_TYPE[channelName].channel)
     });
 });
   
