@@ -18,7 +18,13 @@ function getAllCards() {
 function addCard(newCard) {
     return new Promise((resolve, reject) => {
         const id = { id: helper.getNewId(cards) }
-        newCard = { ...id, ...newCard }
+        if ('balance' in newCard) {
+            console.log('balance -> ', newCard.balance);
+            newCard = { ...id, ...newCard }
+        } else {
+            const balance = {balance : 0}
+            newCard = { ...id, ...newCard, ...balance }
+        }
         cards.push(newCard)
         helper.writeJSONFile('./data/' + filename, cards)
         resolve(newCard)
