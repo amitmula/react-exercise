@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 // Starting server
 let server = app.listen(config.port)
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(server)
 const CARD_ADDED = {
 	channel: 'card added'
 };

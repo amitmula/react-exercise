@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<table
+  className="table table-striped table-bordered table-hover"
+  data-testid="cardsListTable"
+  test-attribute="testPropVal"
+>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Card Number
+      </th>
+      <th>
+        Balance
+      </th>
+      <th>
+        Limit
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td
+        className="noResults"
+        colSpan="4"
+      >
+        No cards found
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<form
+  className=""
+  data-testid="newCardForm"
+  onSubmit={[Function]}
+  test-attribute="testPropVal"
+>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      className="form-control"
+      id="name"
+      onChange={[Function]}
+      placeholder="Enter name"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="number"
+    >
+      Card Number
+    </label>
+    <input
+      className="form-control"
+      id="number"
+      onChange={[Function]}
+      placeholder="Enter card number"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      className="form-label"
+      htmlFor="limit"
+    >
+      Limit
+    </label>
+    <input
+      className="form-control"
+      id="limit"
+      onChange={[Function]}
+      placeholder="Enter Limit"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    type="submit"
+  >
+    Add
+  </button>
+</form>
+`;

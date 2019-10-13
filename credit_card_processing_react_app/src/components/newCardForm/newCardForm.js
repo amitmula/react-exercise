@@ -11,14 +11,18 @@ export default class AddNewCard extends Component {
                 balance: 0
             },
             alertBox: false,
-            alertVarient: "primary",
-            message : [],
+            alertVarient: '',
+            message : '',
             httpSuccess: true
         }
     }
 
-    setShow(val) {
+    setShow = val => {
         this.setState({...this.state, alertBox: val})
+    }
+
+    resetForm() {
+        this.setState(Object.assign({}, this.state, { form: {balance: 0} }))
     }
 
     handleSubmit = event => {
@@ -35,7 +39,8 @@ export default class AddNewCard extends Component {
             return response.json()
         }).then( resp => {
             if(this.state.httpSuccess) {
-                this.setState(Object.assign({}, this.state, { message: resp.message, alertVarient: "success", alertBox: true, form: {balance: 0}}))
+                this.setState(Object.assign({}, this.state, { message: resp.message, alertVarient: "success", alertBox: true }))
+                this.resetForm()
             } else {
                 this.setState(Object.assign({}, this.state, { message: resp.errors[0].msg, alertVarient: "danger", alertBox: true }))
             }
@@ -44,9 +49,8 @@ export default class AddNewCard extends Component {
         });
         event.preventDefault();
     }
-    
 
-    handleFormChange(event) {
+    handleFormChange = event => {
         var addForm = this.state.form
         addForm[event.target.id] = event.target.value
         this.setState({...this.state, form: addForm})
@@ -54,8 +58,8 @@ export default class AddNewCard extends Component {
 
     render() {
         return (
-        <div>
-            <Form onSubmit={(e) => this.handleSubmit(e)}>
+        <React.Fragment>
+            <Form data-testid="newCardForm" test-attribute={this.props.testProp} onSubmit={(e) => this.handleSubmit(e)}>
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter name" value={this.state.form.name ? this.state.form.name : ''} onChange={(e) => this.handleFormChange(e)} required />
@@ -75,9 +79,12 @@ export default class AddNewCard extends Component {
                     Add
                 </Button>
             </Form>
-            { this.state.alertBox ?  <Alert variant={this.state.alertVarient} className="alertBox" onClose={() => this.setShow(false)} dismissible>
+            { this.state.alertBox && 
+                <Alert variant={this.state.alertVarient} className="alertBox" onClose={() => this.setShow(false)} dismissible>
                 {this.state.message}
-            </Alert> : '' }
-        </div>)
+                </Alert> 
+            }
+        </React.Fragment>
+        )
     }
 }
