@@ -61,3 +61,9 @@ $ npm start
 ```
 
 it should be up and running on http://localhost:3000
+
+## Running unit tests
+
+```sh
+npm test
+```
